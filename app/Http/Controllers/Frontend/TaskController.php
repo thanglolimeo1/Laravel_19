@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Frontend;
+use App\Task;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 class TaskController extends Controller
@@ -12,7 +13,17 @@ class TaskController extends Controller
     
     public function index()
     {
-        dd('Đây là hàm index');
+        // dd('dfghj');
+        $tasks = Task::all();
+        $tasks = Task::orderBy('name','desc')->get();
+
+        // where('status',1)
+        // ->orderBy('name','desc')
+        // ->take(1)
+        // ->get();
+        return view('home')->with([
+            'tasks' =>$tasks]);
+
     }
     /**
      * Show the form for creating a new resource.
@@ -31,8 +42,24 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->only(['name','deadline']);
-        dd($input);
+        
+        // $task->name = 'Học Laravel';
+        // $task->status = 1;
+        // $task->deadline = '2019-12-17 23:00:00';
+        $name = $request->get('name');
+        $content = $request->get('content');
+        $deadline = $request->get('deadline');
+        $task = new Task();
+        $task->name = $name;
+        $task->content = $content;
+        $task->deadline = $deadline;
+        $task->status = 1;
+        $task->updated_at = null;
+        $task->save();
+
+       return redirect()->route('task.index'); 
+        // $input = $request->only(['name','deadline']);
+        // dd($input);
     }
     /**
      * Display the specified resource.
@@ -63,7 +90,13 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd('Update có Id là : '.$id);
+        $url = $request->fulexUrl();
+        dd($url);
+        $task = Task::find($id);
+        $task->name = 'Học Laravel 3';
+        $task->status = 1;
+        $task->save();
+        // dd('Update có Id là : '.$id);
     }
     /**
      * Remove the specified resource from storage.
@@ -73,7 +106,10 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        dd('Xóa có Id là : '.$id);
+        $task = Task::find($id);
+        $task->delete();
+        return redirect()->route('task.index');
+        // dd('Xóa có Id là : '.$id);
     }
     public function complete($id){
         dd('Complete có Id là : '.$id);

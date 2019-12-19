@@ -205,6 +205,21 @@ Route::group(['namespace' => 'Admin'] , function(){
 // 	]);
 // });
 // Route::resource('task', 'Frontend\TaskController');
+// Route::group(['namespace' => 'Frontend','as' => 'task.'] , function(){
+// 	Route::get('task','TaskController@index')->name('index');
+// 	Route::get('task/create','TaskController@create')->name('create');
+// 	Route::post('task/store','TaskController@store')->name('store');
+// 	Route::get('task/{id}','TaskController@show')->name('show');
+// 	Route::get('task/{id}/edit','TaskController@edit')->name('edit');
+// 	Route::put('task/{id}','TaskController@update')->name('update');
+// 	Route::delete('task/{id}','TaskController@destroy')->name('destroy');
+// 	Route::get('task/complete/{id}','TaskController@complete')->name('complete');
+// 	Route::get('task/recomplete/{id}','TaskController@reComplete')->name('recomplete');
+// }); 
+
+
+//EX05-HW
+// Route::resource('task', 'Frontend\TaskController');
 Route::group(['namespace' => 'Frontend','as' => 'task.'] , function(){
 	Route::get('task','TaskController@index')->name('index');
 	Route::get('task/create','TaskController@create')->name('create');
@@ -215,4 +230,4 @@ Route::group(['namespace' => 'Frontend','as' => 'task.'] , function(){
 	Route::delete('task/{id}','TaskController@destroy')->name('destroy');
 	Route::get('task/complete/{id}','TaskController@complete')->name('complete');
 	Route::get('task/recomplete/{id}','TaskController@reComplete')->name('recomplete');
-}); 
+});
