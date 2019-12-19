@@ -89,10 +89,16 @@ Laravel
                     @foreach($tasks as $task)
                         <tr>
                         <td class="table-text"><div>{{ $task->name }}</div></td>
+                        <!-- Task Show Button -->
+                        <td>
+                            <a href="{{ route('task.show' , 1) }}" type="submit" class="btn btn-success">
+                                <i class="fa fa-btn fa-check"></i>Detail
+                            </a>
+                        </td>
                         <!-- Task Complete Button -->
                         <td>
                             <a href="{{ route('task.complete' , 1) }}" type="submit" class="btn btn-success">
-                                <i class="fa fa-btn fa-check"></i>Hoàn thành
+                                <i class="fa fa-btn fa-check"></i>Complete
                             </a>
                         </td>
                         <!-- Task Delete Button -->
@@ -101,7 +107,7 @@ Laravel
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <button type="submit" class="btn btn-danger">
-                                    <i class="fa fa-btn fa-trash"></i>Xoá
+                                    <i class="fa fa-btn fa-trash"></i>Delete
                                 </button>
                             </form>
                         </td>
